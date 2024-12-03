@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Invitation 💖</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-align: center;
+            background: linear-gradient(to bottom, #ffe4e1, #ffcccc);
+            margin: 0;
+            padding: 0;
+            color: #5e2a3d;
+        }
+        h1, h2 {
+            color: #e75480;
+        }
+        .button {
+            padding: 12px 25px;
+            font-size: 18px;
+            margin: 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: #ff69b4;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        .button:hover {
+            background-color: #d14785;
+            transform: scale(1.1);
+        }
+        .popup {
+            color: #e75480;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px;
+            padding: 20px;
+        }
+        .activity-grid img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .activity-grid img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .time-picker {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #e75480;
+            border-radius: 5px;
+        }
+        .final-message img {
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        .floating-hearts {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.floating-hearts span {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: red;
+    opacity: 0.7;
+    border-radius: 50%;
+    animation: floatUp 5s infinite ease-in-out;
+}
+
+.floating-hearts span:nth-child(odd) {
+    background: #ff69b4;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-10%) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* Adjust individual hearts' timings and positions */
+.floating-hearts span:nth-child(1) {
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.floating-hearts span:nth-child(2) {
+    left: 20%;
+    animation-delay: 1s;
+}
+
+.floating-hearts span:nth-child(3) {
+    left: 40%;
+    animation-delay: 2s;
+}
+
+.floating-hearts span:nth-child(4) {
+    left: 70%;
+    animation-delay: 3s;
+}
+
+.floating-hearts span:nth-child(5) {
+    left: 90%;
+    animation-delay: 4s;
+}
+
+        
+    </style>
+</head>
+<body>
+    <div class="floating-hearts">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    
+    <!-- First Page -->
+    <div id="first-page">
+        <h1>Will You Go On a Date With Me? 💖</h1>
+        <h2>Because you're my everything! 🥰</h2>
+        <img src="https://media.tenor.com/fYpViWgF-qgAAAAi/teagif-cute.gif" alt="Cute gif">
+        <br>
+        <button class="button" onclick="showPage('time-page')">Yes, I'd Love To! 💕</button>
+        <button class="button" onclick="showNoPopup()">No 😢</button>
+        <div id="popup-container"></div>
+    </div>
+
+    <!-- Time Page -->
+    <div id="time-page" style="display: none;">
+        <h1>Choose a Time 🕒</h1>
+        <img src="https://c.tenor.com/4W3cNZ9F6N8AAAAd/tenor.gif" alt="Excited gif">
+        <div>
+            <button class="button" onclick="selectTime('21:00 - 22:00')">21:00 - 22:00</button>
+            <button class="button" onclick="selectTime('22:00 - 23:00')">22:00 - 23:00</button>
+            <button class="button" onclick="selectTime('23:00 - 00:00')">23:00 - 00:00</button>
+            <button class="button" onclick="showPage('custom-time-page')">Custom Time</button>
+        </div>
+        <button class="button" onclick="showPage('first-page')">Back</button>
+    </div>
+
+    <!-- Custom Time Page -->
+    <div id="custom-time-page" style="display: none;">
+        <h1>Pick Your Custom Time 🕒</h1>
+        <label for="start-time">Start Time:</label>
+        <input type="time" class="time-picker" id="start-time">
+        <label for="end-time">End Time:</label>
+        <input type="time" class="time-picker" id="end-time">
+        <br>
+        <button class="button" onclick="customTimeSelected()">Submit</button>
+        <button class="button" onclick="showPage('time-page')">Back</button>
+    </div>
+
+    <!-- Activity Page -->
+    <div id="activity-page" style="display: none;">
+        <h1>What Shall We Do? 🎉</h1>
+        <div class="activity-grid">
+            <img src="https://i.pinimg.com/736x/66/67/46/66674601c3ade07455ec77754510ca7d.jpg" 
+                 alt="Play Roblox" onclick="selectActivity('Play Roblox')">
+            <img src="https://static1.thegamerimages.com/wordpress/wp-content/uploads/2020/10/Genshin-Impact-10-Paimon-Memes-That-Will-Have-You-Cry-Laughing-featured-image.jpg" 
+                 alt="Genshin Impact" onclick="selectActivity('Play Genshin Impact')">
+            <img src="https://occ-0-8407-116.1.nflxso.net/dnm/api/v6/9pS1daC2n6UGc3dUogvWIPMR_OU/AAAABd0fJbk0rSFqHSneKwPurJboQcDv5mYqfx5ezunI08irxVTSMyT58WBH0IREg2b0_Vtjefe4McAoYXesXKMzMMtVEpzaviRWQE14fVWTvNeMdmcuBgXuU-FEkw.jpg?r=021" 
+                 alt="Anime" onclick="selectActivity('Watch Anime')">
+            <img src="https://img.freepik.com/free-photo/empty-road-dark-atmosphere_23-2150914298.jpg" 
+                 alt="Horror Movie" onclick="selectActivity('Watch a Horror Movie')">
+            <img src="https://saichintala.com/wp-content/uploads/2014/11/interstellar-3.jpg" 
+                 alt="Movie" onclick="selectActivity('Watch Interstellar')">
+        </div>
+        <button class="button" onclick="showPage('time-page')">Back</button>
+    </div>
+
+    <!-- Final Page -->
+    <div id="final-page" style="display: none;">
+        <div class="final-message">
+            <h1>All Set! Can't Wait! 💕</h1>
+            <p>At: <span id="selected-time"></span></p>
+            <p>Let's <span id="selected-activity"></span></p>
+            <p>Let's Make It Memorable My Love! 🥰</p>
+            <img src="https://media1.tenor.com/m/fzdBVjL_kg4AAAAd/natsuhiko-hyuuga.gif" alt="Excited gif">
+        </div>
+        <button class="button" onclick="showPage('activity-page')">Back</button>
+    </div>
+
+    <script>
+        let selectedTime = '';
+        let selectedActivity = '';
+        let noClickCount = 0;
+
+        function showPage(pageId) {
+            const pages = ['first-page', 'time-page', 'custom-time-page', 'activity-page', 'final-page'];
+            pages.forEach(page => document.getElementById(page).style.display = 'none');
+            document.getElementById(pageId).style.display = 'block';
+        }
+
+        function showNoPopup() {
+            const popupContainer = document.getElementById('popup-container');
+            noClickCount++;
+            const popup = document.createElement('div');
+            popup.className = 'popup';
+            popup.innerText = "Please " + "!".repeat(noClickCount);
+            popupContainer.appendChild(popup);
+
+            if (noClickCount > 10) {
+                alert("I'm not giving up! Say yes!");
+            }
+        }
+
+        function selectTime(time) {
+            selectedTime = time;
+            showPage('activity-page');
+        }
+
+        function customTimeSelected() {
+            const startTime = document.getElementById('start-time').value;
+            const endTime = document.getElementById('end-time').value;
+            if (startTime && endTime) {
+                selectedTime = `${startTime} - ${endTime}`;
+                showPage('activity-page');
+            } else {
+                alert("Please select both start and end times.");
+            }
+        }
+
+        function selectActivity(activity) {
+            selectedActivity = activity;
+            document.getElementById('selected-time').innerText = selectedTime;
+            document.getElementById('selected-activity').innerText = selectedActivity;
+            showPage('final-page');
+        }
+    </script>
+</body>
+</html>
