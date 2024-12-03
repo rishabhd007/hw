@@ -256,42 +256,6 @@
             showPage('final-page');
         }
         // Add this function to your existing script
-function submitSelection() {
-    const time = selectedTime;  // Get the selected time
-    const activity = selectedActivity;  // Get the selected activity
-
-    if (!time || !activity) {
-        alert('Please select both a time and an activity!');
-        return;
-    }
-
-    fetch('/api/submit-selection', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ time, activity }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);  // Handle the response from the server
-        alert('Your selection has been submitted!');
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('There was an error submitting your selection.');
-    });
-}
-function selectActivity(activity) {
-    selectedActivity = activity;
-    document.getElementById('selected-time').innerText = selectedTime;
-    document.getElementById('selected-activity').innerText = selectedActivity;
-
-    // Submit the data to the serverless function
-    submitSelection();
-
-    showPage('final-page');
-}
 
     </script>
 </body>
